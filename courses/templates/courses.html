@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="pure-g-r content-ribbon">
+    <div class="pure-u-1">
+        <div class="l-box">
+            <h4 class="content-subhead">Listagem de Cursos do SimpleMOOC</h4>
+        </div>
+    </div>
+</div>
+{% for course in courses %}
+<div class="pure-g-r content-ribbon">
+    <div class="pure-u-1-3">
+        <div class="l-box">
+            <a href="{{ course.slug }}">
+                {% if course.thumbnail %}
+                <img src="{{ course.thumbnail.url }}" alt="{{ course.name }}">
+                {% else %}
+                <img src="{% static 'img/no_image.png' %}" alt="{{ course.name }}">
+                {% endif %}
+            </a>
+        </div>
+    </div>
+    <div class="pure-u-2-3">
+        <div class="l-box">
+            <h1 class="content-subhead">
+                <a style="color: #7b7b7b; text-decoration:none" href="{{ course.slug }}" title="">
+                    {{ course.name }}
+                </a>
+            </h1>
+            <h4 style="margin-top: 0px">{{ course.description }}</h4>
+            <p style="margin-top: 50px">{{ course.about }}</p>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="pure-g-r content-ribbon text-align: center">
+    <div class="pure-u-1">
+        <div class="l-box">
+            <h1 style="text-align: center">Nenhum curso disponíveis na plataforma =(</h1>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
