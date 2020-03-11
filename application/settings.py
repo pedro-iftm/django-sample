@@ -52,12 +52,12 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'simplemooc_db',
-        'USER': 'postgres',
-        'PASSWORD': ' ',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'database',
+        # 'USER': 'b2buser',
+        # 'PASSWORD': 'b2bpass',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 
