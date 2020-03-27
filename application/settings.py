@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'courses',
+    'accounts',
+    'courses'
 ]
 
 MIDDLEWARE = [
@@ -95,3 +96,14 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'application/media/')
 
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_PORT = '1025'
+EMAIL_HOST = 'localhost'
+
+CONTACT_MAIL = 'simplemooc@email.com'
+
+# Auth
+LOGIN_URL = '/contas'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = ''

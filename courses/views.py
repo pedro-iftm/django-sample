@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, render
+
 from courses.models import Course
+
 from .forms import ContactCourse
 
 
@@ -15,21 +17,17 @@ def courses(request):
 def details(request, slug):
     TEMPLATE_DETAILS = 'details.html'
 
+    context = {}
+    course = get_object_or_404(Course, slug=slug)
+
     if request.method == 'POST':
         form = ContactCourse(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data['name'])
-            #PAREI AQ
-            # como esvaziar o form dps de clicar em enviar
-            # o que fazer com esse isvalid?
-    else:
-        form = ContactCourse()
-    
 
-    course = get_object_or_404(Course, slug=slug)
-    context = {
-        'course': course,
-        'form': form
-    }
+        if form.is_valid():
+            context['is_valid'] = True
+            form.send_mail(course)
+
+    form = ContactCourse()
+    context.update({'course': course, 'form': form})
 
     return render(request, TEMPLATE_DETAILS, context)
