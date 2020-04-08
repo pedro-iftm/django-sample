@@ -1,5 +1,4 @@
 from django import forms
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -25,7 +24,15 @@ class RegisterForm(UserCreationForm):
         return user
 
 
-class EditAccount(forms.ModelForm):
+class EditAccountForm(forms.ModelForm):
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError('Email já cadastrado')
+
+        return email
 
     class Meta:
         model = User

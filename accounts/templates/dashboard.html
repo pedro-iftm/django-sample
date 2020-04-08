@@ -4,7 +4,7 @@
     <div class="pure-u-1">
         <ul class="breadcrumb">
             {% block breadcrumb %}
-            <li><a href="/contas/entrar/minha-conta">Meu Painel</a></li>
+            <li><a href="/contas">Meu Painel</a></li>
             {% endblock %}
         </ul>
     </div>
@@ -15,12 +15,12 @@
                 <li><a href="#">Curso 1</a></li>
                 <li><a href="#">Curso 2</a></li>
                 <li class="pure-menu-heading">Minha Conta</li>
-                <li><a href="/contas/entrar/editar">Editar Conta</a></li>
-                <li><a href="#">Editar Senha</a></li>
+                <li><a href="/contas/editar">Editar Conta</a></li>
+                <li><a href="/contas/editar/senha">Editar Senha</a></li>
             </ul>
         </div>
     </div>
-    <div class="pure-u-1-3" style="margin-left: 10px;">
+    <div class="pure-u-1-3" style="margin-left: 30px;">
         <div class="inner">
             {% block dashboard_content %}
             <p><strong>Usuário</strong>: {{ user }}</p>
