@@ -17,13 +17,16 @@
             <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
                 <a class="pure-menu-heading" href="/">SIMPLE MOOC</a>
                 <ul>
+                    <!-- <li><a href="/contato">Contato</a></li> -->
+                    {% if user.is_authenticated %}
+                    <li><a href="#">Bem vindo(a) {{ user }}</a></li>
                     <li style="color: darkgray">|</li>
                     <li><a href="/cursos">Cursos</a></li>
-                    <li><a href="/contato">Contato</a></li>
-                    {% if user.is_authenticated %}
-                    <li><a href="/contas/sair">Sair</a></li>
+                    <li><a href="/contas/entrar/minha-conta">Minha conta</a></li>
+                    <li><a href="/contas/entrar/sair">Sair</a></li>
                     {% else %}
-                    <li><a href="/contas/entrar">Entrar</a></li>
+                    <li style="color: darkgray">|</li>
+                    <li><a href="/contas/entrar">Login</a></li>
                     {% endif %}
                 </ul>
             </div>
