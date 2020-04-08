@@ -101,7 +101,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_PORT = '1025'
 EMAIL_HOST = 'localhost'
 
-CONTACT_MAIL = 'simplemooc@email.com'
+CONTACT_MAIL = 'pedroiftm1999@gmail.com'
 
 # Auth
 LOGIN_URL = '/contas'
