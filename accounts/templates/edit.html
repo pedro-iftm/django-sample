@@ -2,16 +2,13 @@
 
 {% block breadcrumb %}
     {{ block.super }}
-    <li>/</li>
-    <li><a href="/contas/editar">Editar Conta</a></li>
+    <li style="display: inline;">/</li>
+    <li style="display: inline;"><a href="/contas/editar">Editar Conta</a></li>
 {% endblock %}
 
 {% block dashboard_content %}
 <form class="pure-form pure-form-stacked" method="post">
     {% csrf_token %}
-    {% if success %}
-    <p>Os dados foram alterados com sucesso</p>
-    {% endif %}
     <fieldset>
         {{ form.non_field_errors }}
         {% for field in form %}

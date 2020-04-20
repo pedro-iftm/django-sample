@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib.auth import authenticate, login
+from courses.models import Enrollment
 from .forms import RegisterForm, EditAccountForm
+
+
+@login_required
+def dashboard(request):
+    template_name = 'dashboard.html'
+    return render(request, template_name, {})
 
 
 def register(request):
@@ -25,12 +33,6 @@ def register(request):
 
 
 @login_required
-def dashboard(request):
-    template_name = 'dashboard.html'
-    return render(request, template_name, {})
-
-
-@login_required
 def edit(request):
     template_name = 'edit.html'
     form = EditAccountForm()
@@ -41,8 +43,8 @@ def edit(request):
 
         if form.is_valid():
             form.save()
-            form = EditAccountForm(instance=request.user)
-            context['success'] = True
+            messages.success(request, 'Os dados da sua conta foram alterados com sucesso')
+            return redirect('/contas')
     
     else:
         form = EditAccountForm(instance=request.user)
