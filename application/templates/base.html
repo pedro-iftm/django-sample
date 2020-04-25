@@ -17,16 +17,16 @@
             <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
                 <a class="pure-menu-heading" href="/">Cursos Grátis</a>
                 <ul>
-                    <!-- <li><a href="/contato">Contato</a></li> -->
                     {% if user.is_authenticated %}
-                    <li><a href="#">Bem vindo(a) {{ user }}</a></li>
-                    <li style="color: darkgray">|</li>
-                    <li><a href="/cursos">Cursos</a></li>
-                    <li><a href="/contas">Minha conta</a></li>
-                    <li><a href="/contas/sair">Sair</a></li>
+                        <i class="icon-cog"></i>
+                        <li><a href="#">Bem vindo(a), {{ user }}</a></li>
+                        <li style="color: darkgray">|</li>
+                        <li><a href="/cursos">Cursos</a></li>
+                        <li><a href="/contas">Minha conta</a></li>
+                        <li><a href="/contas/sair">Sair</a></li>
                     {% else %}
-                    <li style="color: darkgray">|</li>
-                    <li><a href="/contas/entrar">Login</a></li>
+                        <li style="color: darkgray">|</li>
+                        <li><a href="/contas/entrar">Login</a></li>
                     {% endif %}
                 </ul>
             </div>
