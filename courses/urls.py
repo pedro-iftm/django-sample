@@ -6,5 +6,7 @@ app_name = 'courses'
 urlpatterns = [
     path('', views.courses),
     path('<slug:slug>/', views.details),
-    path('<slug:slug>/inscricao', views.enrollment)
+    path('<slug:slug>/inscricao', views.enrollment),
+    path('<slug:slug>/anuncio', views.annoucements),
+    path('<slug:slug>/cancelar', views.undo_enrollment)
 ]

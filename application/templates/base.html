@@ -18,7 +18,6 @@
                 <a class="pure-menu-heading" href="/">Cursos Grátis</a>
                 <ul>
                     {% if user.is_authenticated %}
-                        <i class="icon-cog"></i>
                         <li><a href="#">Bem vindo(a), {{ user }}</a></li>
                         <li style="color: darkgray">|</li>
                         <li><a href="/cursos">Cursos</a></li>
