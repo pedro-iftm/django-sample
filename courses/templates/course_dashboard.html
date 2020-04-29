@@ -3,7 +3,7 @@
 {% block breadcrumb %}
     {{ block.super }}
     <li style="display: inline;">/</li>
-    <li style="display: inline;"><a href="/cursos/{{ enrollment.course.slug }}/anuncio">{{ course }}</a></li>
+    <li style="display: inline;"><a href="/cursos/{{ course.slug }}/aulas">{{ course }}</a></li>
 {% endblock %}
 
 {% block menu_options %}
@@ -11,27 +11,9 @@
     {{ course.name }}
 </li>
 <li>
-    <a href="#">
+    <a href="/cursos/{{ course.slug }}/aulas">
         <i class="fa fa-video-camera"></i>
         Aulas e Materiais
-    </a>
-</li>
-<li>
-    <a href="#">
-        <i class="fa fa-info-circle"></i>
-        Informações
-    </a>
-</li>
-<li>
-    <a href="#">
-        <i class="fa fa-envelope"></i>
-        Anúncios
-    </a>
-</li>
-<li>
-    <a href="#">
-        <i class="fa fa-comments"></i>
-        Fórum de Dúvidas
     </a>
 </li>
 {{ block.super  }}

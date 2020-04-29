@@ -17,7 +17,7 @@
                     <li><a class="pure-menu-heading" style="font-weight: bold;">Meus Cursos</a></li>
                     {% for enrollment in enrollments %}
                     <li>
-                        <a href="/cursos/{{ enrollment.course.slug }}/anuncio">
+                        <a href="/cursos/{{ enrollment.course.slug }}/aulas">
                             <i class="icon-book"></i>
                             {{ enrollment.course }}
                         </a>
@@ -48,10 +48,10 @@
                 <h4 class="content-subhead">Listagem de Cursos</h4>
                 {% for enrollment in enrollments %}
                     <div class="card">
-                        <h3>{{ enrollment.course }}</h3>
+                        <h3 style="color: grey">{{ enrollment.course }}</h3>
                         {{ enrollment.course.description | linebreaks }}
                         <div class="pure-controls">
-                            <a href="/cursos/{{ enrollment.course.slug }}/anuncio" class="pure-button">Acessar</a>
+                            <a href="/cursos/{{ enrollment.course.slug }}/aulas" class="pure-button">Acessar</a>
                             <a href="/cursos/{{ enrollment.course.slug }}/cancelar" class="pure-button" style="background-color: red;">Cancelar</a>
                         </div>
                     </div>

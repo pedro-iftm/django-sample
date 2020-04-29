@@ -18,7 +18,7 @@
                 <a class="pure-menu-heading" href="/">Cursos Grátis</a>
                 <ul>
                     {% if user.is_authenticated %}
-                        <li><a href="#">Bem vindo(a), {{ user }}</a></li>
+                        <li><a href="/">Bem vindo(a), {{ user.first_name|default:user }}</a></li>
                         <li style="color: darkgray">|</li>
                         <li><a href="/cursos">Cursos</a></li>
                         <li><a href="/contas">Minha conta</a></li>
@@ -43,7 +43,7 @@
     </div>
     <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
 </body>
-<footer class="footer">
+<footer class="footer" style="position: fixed; bottom: 0; width: 100%;">
     CG - Plataforma de ensino a distância
 </footer>
 

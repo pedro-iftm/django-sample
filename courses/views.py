@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from courses.models import Course, Enrollment
 
+from .models import Course, Enrollment, Lesson, Material
 from .forms import ContactCourse
+from .decorators import enrollment_required
 
 
 def courses(request):
@@ -46,21 +47,6 @@ def enrollment(request, slug):
 
     return redirect(f'/contas')
 
-@login_required
-def annoucements(request, slug):
-    course = get_object_or_404(Course, slug=slug)
-
-    if not request.user.is_staff:
-        enrollment = get_object_or_404(Enrollment, user=request.user, course=course)
-
-        if not enrollment.is_approved():
-            messages.error(request, 'Sua inscrição está pendente')
-            return redirect('/contas')
-
-    template = 'announcements.html'
-    context = {'course': course}
-
-    return render(request, template, context)
 
 @login_required
 def undo_enrollment(request, slug):
@@ -76,4 +62,59 @@ def undo_enrollment(request, slug):
     context = {'enrollment': enrollment,
                'course': course}
 
+    return render(request, template, context)
+
+
+@login_required
+@enrollment_required
+def lessons(request, slug):
+    course = request.course
+    template = 'lessons.html'
+    lessons = course.release_lessons()
+
+    if request.user.is_staff:
+        lessons = course.lessons.all()
+
+    context = {'course': course,
+               'lessons': lessons}
+
+    return render(request, template, context)
+
+
+@login_required
+@enrollment_required
+def lesson(request, slug, pk):
+    course = request.course
+    lesson = get_object_or_404(Lesson, pk=pk, course=course)
+
+    if not request.user.is_staff and not lesson.is_available():
+        messages.error(request, 'Esta aula não está disponível')
+        return redirect('/', slug=course.slug)
+
+    template = 'lesson.html'
+    context = {'course': course,
+               'lesson': lesson}
+    
+    return render(request, template, context)
+
+
+@login_required
+@enrollment_required
+def material(request, slug, lesson_pk, pk):
+    course = request.course
+    material = get_object_or_404(Material, pk=pk, lesson__course=course)
+    lesson = material.lesson
+
+    if not request.user.is_staff and not lesson.is_available():
+        messages.error(request, 'Este material não está disponível')
+        return redirect('/', slug=course.slug)
+
+    if not material.is_embedded():
+        return redirect(material.file.url)
+
+    template = 'material.html'
+    context = {'course': course,
+               'lesson': lesson,
+               'material': material}
+    
     return render(request, template, context)

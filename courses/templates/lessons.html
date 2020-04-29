@@ -1,0 +1,28 @@
+{% extends 'course_dashboard.html' %}
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li style="display: inline;">/</li>
+    <li style="display: inline;"><a href="/cursos/{{ course.slug }}/aulas">Aulas e Materiais</a></li>
+{% endblock %}
+
+{% block dashboard_content %}
+{% for lesson in lessons %}
+    <div class="card">
+        <h2><a href="/cursos/{{ course.slug }}/aula/{{ lesson.pk }}">Apresentação do Curso</a></h2>
+        <p>
+            {{ lesson.description | striptags | truncatechars:170 }}
+            <br />
+            <a href="/cursos/{{ course.slug }}/aula/{{ lesson.pk }}" style="color: cornflowerblue">
+                Acessar Aula
+            </a>
+        </p>
+    </div>
+    {% empty %}
+    <div class="card">
+        <h2>
+            Nenhuma aula disponível.
+        </h2>
+    </div>
+{% endfor %}
+{% endblock %}
