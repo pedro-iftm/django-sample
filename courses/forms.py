@@ -2,7 +2,7 @@ from django.core.mail import send_mail
 from django import forms
 from django.conf import settings
 
-from core.mail import send_mail_template
+# from core.mail import send_mail_template
 
 
 class ContactCourse(forms.Form):
@@ -12,10 +12,12 @@ class ContactCourse(forms.Form):
 
     def send_mail(self, course):
         subject = f'Dúvida sobre o curso {course}'
-        message = {'context': self.cleaned_data['message']}
+        message = self.cleaned_data['message']
         from_ = self.cleaned_data['email']
-        to = settings.CONTACT_MAIL
-        template_name = 'contact_email.html'
+        to = [settings.CONTACT_MAIL]
+        send_mail(subject, message, from_, to)
 
-        send_mail_template(subject, template_name, message, from_, [to])
+        # template_name = 'contact_email.html'
+        # send_mail_template(subject, template_name, message, from_, [to])
+
         
